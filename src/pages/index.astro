@@ -3,15 +3,25 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base>
-  <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-    <h1 class="mb-4 font-display text-5xl font-bold text-tierra-800 md:text-7xl">
-      Muyu
-    </h1>
-    <p class="mb-8 max-w-md text-lg text-tierra-600">
-      Alimentos fermentados artesanales.
-      <br />
-      Próximamente.
-    </p>
-    <div class="h-px w-16 bg-tierra-300"></div>
+  <main class="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <!-- Imagen de fondo detrás del texto -->
+    <div class="absolute h-96 w-96 overflow-hidden rounded-full opacity-15 md:h-[32rem] md:w-[32rem]">
+      <img
+        src="/microscopio.jpeg"
+        alt="Vista microscópica de cultivo fermentado"
+        class="h-full w-full scale-150 object-cover object-center"
+      />
+    </div>
+    <!-- Contenido encima de la imagen -->
+    <div class="relative z-10">
+      <h1 class="mb-4 text-5xl font-bold text-tierra-800 md:text-7xl" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+        Muyu
+      </h1>
+      <p class="mb-8 max-w-md text-lg text-tierra-600">
+        Fermentos Cuidados
+      </p>
+      <div class="mx-auto mb-8 h-px w-32 bg-tierra-300"></div>
+      <p class="text-lg text-tierra-600">Próximamente.</p>
+    </div>
   </main>
 </Base>
