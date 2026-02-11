@@ -1,0 +1,62 @@
+---
+import type { GetStaticPaths } from "astro";
+import qrRedirects from "../../content/qr-redirects.json";
+
+export const getStaticPaths = (() => {
+  return Object.keys(qrRedirects).map((slug) => ({
+    params: { slug },
+  }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const entry = qrRedirects[slug as keyof typeof qrRedirects];
+
+// Si no existe el slug, redirigir al home
+if (!entry) {
+  return Astro.redirect("/");
+}
+
+const { target, label } = entry;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <title>Redirigiendo — {label}</title>
+
+    <!-- Registrar analíticas del lado del cliente -->
+    <script define:vars={{ slug, target, label }}>
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const event = {
+          slug,
+          target,
+          label,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          utmSource: params.get("utm_source"),
+          utmMedium: params.get("utm_medium"),
+          utmCampaign: params.get("utm_campaign"),
+          referrer: document.referrer,
+        };
+        console.log("[QR Scan]", JSON.stringify(event));
+
+        // Acá se puede enviar a un endpoint de analíticas:
+        // navigator.sendBeacon("/api/qr-scan", JSON.stringify(event));
+      } catch {
+        // No bloquear la redirección si falla el tracking
+      }
+
+      // Fallback JS por si meta refresh no funciona
+      window.location.href = target;
+    </script>
+  </head>
+  <body
+    style="font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #faf6f1; color: #5a3629;"
+  >
+    <p>Redirigiendo a {label}…</p>
+  </body>
+</html>

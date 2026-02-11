@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Paleta terrosa y cálida para alimentos fermentados */
+@theme {
+  --color-tierra-50: #faf6f1;
+  --color-tierra-100: #f0e6d6;
+  --color-tierra-200: #e0ccad;
+  --color-tierra-300: #cda97a;
+  --color-tierra-400: #bf8d55;
+  --color-tierra-500: #b47a42;
+  --color-tierra-600: #9a6237;
+  --color-tierra-700: #7d4c30;
+  --color-tierra-800: #693f2d;
+  --color-tierra-900: #5a3629;
+
+  --color-oliva-50: #f6f7ef;
+  --color-oliva-100: #eaecda;
+  --color-oliva-200: #d6dab8;
+  --color-oliva-300: #bcc28e;
+  --color-oliva-400: #a4ab6a;
+  --color-oliva-500: #88904e;
+  --color-oliva-600: #6b723b;
+  --color-oliva-700: #525831;
+  --color-oliva-800: #43472b;
+  --color-oliva-900: #3a3d27;
+
+  --color-crema: #faf6f1;
+  --color-arcilla: #b47a42;
+  --color-musgo: #6b723b;
+  --color-carbon: #2d2a26;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+}
+
+/* Estilos base */
+@layer base {
+  body {
+    @apply bg-crema text-carbon antialiased;
+  }
+}
